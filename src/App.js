@@ -1,26 +1,29 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import Info from './components/Info';
+import Form from './components/Form';
+import Results from './components/Results';
+
+const API_KEY = "963173a181d60009b68fe1705ee661a0";
+
+class App extends React.Component {
+
+  gettingWeather = async () => {
+    const api_url = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=Baranavichy,by&appid=${API_KEY}&units=metric`);
+    const data = await api_url.json();
+    console.log(data);
+  }
+
+  render() {
+    return (
+      <div>
+        <Info />
+        <Form />
+        <Results />
+      </div>
+    );
+  }
 }
 
 export default App;
